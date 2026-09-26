@@ -31,7 +31,11 @@ find . \
 ```
 
 
-После замены можно проверить git diff,
+После замены можно проверить 
+```bash
+git diff
+```
+или
 
 ```bash
 grep -RInE --include='*.tex' --include='*.py' 'ё|Ё' .
