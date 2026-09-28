@@ -32,6 +32,8 @@
 % Математика
 \usepackage{amsmath,amssymb}
 \newtheorem{definition}{Определение}[section]
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{lemma}{Лемма}[section]
 
 % Рисунки
 \usepackage{graphicx}
@@ -111,6 +113,84 @@
     \fill[orange!20!white] (frame.south west) rectangle ([xshift=20pt]frame.north west);
     \end{tcbclipinterior}},
   #3}
+
+% Блок с кодом из внешнего файла в оформлении mintedbox.
+\newcommand{\inputmintedbox}[3][]{%
+    \begin{tcolorbox}[
+        breakable,
+        enhanced,
+        boxsep=0pt,
+        left=25pt,
+        right=0pt,
+        top=3pt,
+        bottom=3pt,
+        arc=5pt,
+        colback=bg,
+        colframe=orange!70,
+        overlay={%
+            \begin{tcbclipinterior}
+            \fill[orange!20!white]
+                (frame.south west)
+                rectangle ([xshift=20pt]frame.north west);
+            \end{tcbclipinterior}
+        }
+    ]
+        \inputminted[
+            linenos,
+            breaklines,
+            fontsize=\small,
+            numbersep=8pt,
+            #1
+        ]{#2}{#3}
+    \end{tcolorbox}%
+}
+
+% Оформление консольных сессий. Лексер linuxconsole и стиль linuxterm
+% поставляются локальным пакетом terminal_theme (см. README.md).
+\definecolor{termbg}{HTML}{1E1E1E}
+\definecolor{termfg}{HTML}{D4D4D4}
+\definecolor{termbar}{HTML}{2D2D2D}
+\definecolor{termframe}{HTML}{3C3C3C}
+\definecolor{termaccent}{HTML}{4EC9B0}
+
+\DeclareTCBListing{consolebox}{O{}}{
+    enhanced,
+    breakable,
+    listing only,
+    listing engine=minted,
+    minted language=linuxconsole,
+    minted style=linuxterm,
+    minted options={
+        linenos=false,
+        breaklines=true,
+        fontsize=\small
+    },
+    colback=termbg,
+    coltext=termfg,
+    colframe=termframe,
+    boxrule=0.5pt,
+    arc=3mm,
+    boxsep=0pt,
+    left=4mm,
+    right=4mm,
+    top=3mm,
+    bottom=3mm,
+    colbacktitle=termbar,
+    coltitle=termaccent,
+    fonttitle=\ttfamily\small\bfseries,
+    title={
+        \textcolor{red!75}{\textbullet}\,
+        \textcolor{yellow!80}{\textbullet}\,
+        \textcolor{green!65}{\textbullet}
+        \hspace{2mm} TERMINAL
+    },
+    titlerule=0pt,
+    toptitle=2mm,
+    bottomtitle=2mm,
+    before skip=10pt,
+    after skip=10pt,
+    #1
+}
 
 \usepackage{relsize}
 
